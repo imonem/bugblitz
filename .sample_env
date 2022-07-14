@@ -1,0 +1,7 @@
+NODE_DEV = development
+
+//Replace <server port> with port number
+PORT = <server port>
+
+//Replace username, password and db name
+MONGO_URI = mongodb+srv://<username>:<password>@cluster0.zialz.mongodb.net/<db name>?retryWrites=true&w=majority
