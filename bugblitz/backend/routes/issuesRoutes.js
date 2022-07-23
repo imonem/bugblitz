@@ -2,13 +2,15 @@ const express = require('express');
 const router = express.Router();
 const {
 	getIssues,
-	createIssues,
+	createIssue,
 	updateIssue,
 	deleteIssue,
 } = require('../controllers/issuesController');
+//protect routes middleware
+const { protect } = require('../middleware/authMiddleware');
 
-router.route('/').get(getIssues).post(createIssues);
+router.route('/').get(protect, getIssues).post(protect, createIssue);
 
-router.route('/:id').put(updateIssue).delete(deleteIssue);
+router.route('/:id').put(protect, updateIssue).delete(protect, deleteIssue);
 
 module.exports = router;
