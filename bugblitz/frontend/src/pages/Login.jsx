@@ -35,7 +35,7 @@ const Login = () => {
 						id='email'
 						name='email'
 						value={email}
-						placeholder='Please enter your email.'
+						placeholder='Please enter your email'
 						onChange={onChange}
 					/>
 					<input
@@ -44,7 +44,7 @@ const Login = () => {
 						id='password'
 						name='password'
 						value={password}
-						placeholder='Please enter your password.'
+						placeholder='Please enter your password'
 						onChange={onChange}
 					/>
 				</form>

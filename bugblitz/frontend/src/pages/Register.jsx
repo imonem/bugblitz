@@ -37,7 +37,7 @@ const Register = () => {
 						id='name'
 						name='name'
 						value={name}
-						placeholder='Please enter your name.'
+						placeholder='Please enter your name'
 						onChange={onChange}
 					/>
 					<input
@@ -46,7 +46,7 @@ const Register = () => {
 						id='email'
 						name='email'
 						value={email}
-						placeholder='Please enter your email.'
+						placeholder='Please enter your email'
 						onChange={onChange}
 					/>
 					<input
@@ -55,7 +55,7 @@ const Register = () => {
 						id='password'
 						name='password'
 						value={password}
-						placeholder='Please enter your password.'
+						placeholder='Please enter your password'
 						onChange={onChange}
 					/>
 					<input
@@ -64,7 +64,7 @@ const Register = () => {
 						id='passwordConfirmation'
 						name='passwordConfirmation'
 						value={passwordConfirmation}
-						placeholder='Please confirm your password.'
+						placeholder='Please confirm your password'
 						onChange={onChange}
 					/>
 				</form>
