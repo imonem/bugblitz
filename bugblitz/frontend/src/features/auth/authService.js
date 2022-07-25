@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+//make sure to add proxy value "http://localhost:5000" to fend package.json to construct the correct URL
 const API_URL = '/api/users/';
 
 //User registeration call
