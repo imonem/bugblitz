@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { FaUser } from 'react-icons/fa';
 import { register, reset } from '../features/auth/authSlice';
+import Spinner from '../components/Spinner';
 
 const Register = () => {
 	const [formData, setformData] = useState({
@@ -15,8 +16,8 @@ const Register = () => {
 
 	const { name, email, password, passwordConfirmation } = formData;
 
-	const navigate = useNavigate;
-	const dispatch = useDispatch;
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	const { user, isLoading, isError, isSuccess, message } = useSelector(
 		(state) => state.auth,
@@ -35,6 +36,7 @@ const Register = () => {
 		if (isSuccess || user) {
 			navigate('/');
 		}
+
 		dispatch(reset);
 	}, [user, isError, isSuccess, message, navigate, dispatch]);
 
@@ -64,6 +66,10 @@ const Register = () => {
 		}
 	};
 
+	if (isLoading) {
+		return <Spinner />;
+	}
+
 	return (
 		<>
 			<section className='heading'>
@@ -72,44 +78,53 @@ const Register = () => {
 				</h1>
 				Create a new account
 			</section>
+
 			<section className='form'>
-				<form className='form-group'>
-					<input
-						type='text'
-						className='form-control'
-						id='name'
-						name='name'
-						value={name}
-						placeholder='Please enter your name'
-						onChange={onChange}
-					/>
-					<input
-						type='email'
-						className='form-control'
-						id='email'
-						name='email'
-						value={email}
-						placeholder='Please enter your email'
-						onChange={onChange}
-					/>
-					<input
-						type='password'
-						className='form-control'
-						id='password'
-						name='password'
-						value={password}
-						placeholder='Please enter your password'
-						onChange={onChange}
-					/>
-					<input
-						type='password'
-						className='form-control'
-						id='passwordConfirmation'
-						name='passwordConfirmation'
-						value={passwordConfirmation}
-						placeholder='Please confirm your password'
-						onChange={onChange}
-					/>
+				<form onSubmit={onSubmit}>
+					<div className='form-group'>
+						<input
+							type='text'
+							className='form-control'
+							id='name'
+							name='name'
+							value={name}
+							placeholder='Please enter your name'
+							onChange={onChange}
+						/>
+					</div>
+					<div className='form-group'>
+						<input
+							type='email'
+							className='form-control'
+							id='email'
+							name='email'
+							value={email}
+							placeholder='Please enter your email'
+							onChange={onChange}
+						/>
+					</div>
+					<div className='form-group'>
+						<input
+							type='password'
+							className='form-control'
+							id='password'
+							name='password'
+							value={password}
+							placeholder='Please enter your password'
+							onChange={onChange}
+						/>
+					</div>
+					<div className='form-group'>
+						<input
+							type='password'
+							className='form-control'
+							id='passwordConfirmation'
+							name='passwordConfirmation'
+							value={passwordConfirmation}
+							placeholder='Please confirm your password'
+							onChange={onChange}
+						/>
+					</div>
 				</form>
 				<div className='form-group'>
 					<button type='submit' className='btn btn-block' onSubmit={onSubmit}>
