@@ -7,7 +7,7 @@ import { register, reset } from '../features/auth/authSlice';
 import Spinner from '../components/Spinner';
 
 const Register = () => {
-	const [formData, setformData] = useState({
+	const [formData, setFormData] = useState({
 		name: '',
 		email: '',
 		password: '',
@@ -42,7 +42,7 @@ const Register = () => {
 
 	//onChange handles the form entries events
 	const onChange = (e) => {
-		setformData((previousState) => ({
+		setFormData((previousState) => ({
 			...previousState,
 			[e.target.name]: e.target.value,
 		}));
@@ -54,6 +54,7 @@ const Register = () => {
 	 * */
 	const onSubmit = (e) => {
 		e.preventDefault();
+
 		if (password !== passwordConfirmation) {
 			toast.error('Passwords do not match');
 		} else {
@@ -125,12 +126,12 @@ const Register = () => {
 							onChange={onChange}
 						/>
 					</div>
+					<div className='form-group'>
+						<button type='submit' className='btn btn-block'>
+							Submit
+						</button>
+					</div>
 				</form>
-				<div className='form-group'>
-					<button type='submit' className='btn btn-block' onSubmit={onSubmit}>
-						Submit
-					</button>
-				</div>
 			</section>
 		</>
 	);
