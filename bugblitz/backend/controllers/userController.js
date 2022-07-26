@@ -36,7 +36,11 @@ const registerUser = asyncHandler(async (req, res) => {
 		password: hashPass,
 	});
 
-	//Response on successful user creation
+	/**Response on successful user creation
+	 *All that is needed here is to return the token, which is stored at localstorage
+	 *Remember when refactoring to remove the _id, name, and, email when returning response
+	 */
+
 	if (user) {
 		res.status(201).json({
 			_id: user.id,
