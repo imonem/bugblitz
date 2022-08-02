@@ -47,16 +47,14 @@ const updateIssue = asyncHandler(async (req, res) => {
 		throw new Error('Issue not found');
 	}
 
-	const user = await User.findById(req.user.id);
-
 	// check for user
-	if (!user) {
+	if (!req.user) {
 		res.status(401);
 		throw new Error('User not found.');
 	}
 
 	//User updates own tickets
-	if (issue.user.toString() !== user.id) {
+	if (issue.user.toString() !== req.user.id) {
 		res.status(401);
 		throw new Error('User not authorized.');
 	}
@@ -81,15 +79,14 @@ const deleteIssue = asyncHandler(async (req, res) => {
 		throw new Error('Issue not found');
 	}
 
-	const user = await User.findById(req.user.id);
 	// check for user
-	if (!user) {
+	if (!req.user) {
 		res.status(401);
 		throw new Error('User not found.');
 	}
 
 	//User deletes own tickets
-	if (issue.user.toString() !== user.id) {
+	if (issue.user.toString() !== req.user.id) {
 		res.status(401);
 		throw new Error('User not authorized.');
 	}

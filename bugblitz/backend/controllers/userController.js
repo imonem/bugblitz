@@ -83,13 +83,7 @@ const userLogin = asyncHandler(async (req, res) => {
  * @access Private
  */
 const userData = asyncHandler(async (req, res) => {
-	const { _id, name, email } = await User.findById(req.user.id);
-
-	res.status(200).json({
-		id: _id,
-		name,
-		email,
-	});
+	res.status(200).json(req.user);
 });
 
 //Generate JWT, remember that I can assign anything (here I assigned id) to the payload using .sign({id})
