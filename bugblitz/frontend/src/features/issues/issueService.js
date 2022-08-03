@@ -15,8 +15,22 @@ const createIssue = async (issueData, token) => {
 	return response.data;
 };
 
-const goalService = {
-	createIssue,
+//List issues
+const listIssues = async (token) => {
+	const config = {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	};
+
+	const response = await axios.post(API_URL, config);
+
+	return response.data;
 };
 
-export default goalService;
+const issueService = {
+	createIssue,
+	listIssues,
+};
+
+export default issueService;
