@@ -13,7 +13,7 @@ export const createIssue = createAsyncThunk(
 	'issue/create',
 	async (issueData, thunkAPI) => {
 		try {
-			const token = thunkAPI.getState().auth.user.token;
+			const token = await thunkAPI.getState().auth.user.token;
 			return await issueService.createIssue(issueData, token);
 		} catch (error) {
 			const message =
@@ -32,7 +32,8 @@ export const listIssues = createAsyncThunk(
 	'issue/listAll',
 	async (_, thunkAPI) => {
 		try {
-			const token = thunkAPI.getState().auth.user.token;
+			const token = await thunkAPI.getState().auth.user.token;
+			console.log(token);
 			return await issueService.listIssues(token);
 		} catch (error) {
 			const message =
@@ -46,6 +47,9 @@ export const listIssues = createAsyncThunk(
 	},
 );
 
+//Todo create the delete issue
+
+//Issue slice
 export const issueSlice = createSlice({
 	name: 'issue',
 	initialState,

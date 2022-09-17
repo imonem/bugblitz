@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import IssueForm from '../components/IssueForm';
 import Issue from '../components/Issue';
 import Spinner from '../components/Spinner';
 import { listIssues } from '../features/issues/issueSlice';
-import { reset } from '../features/auth/authSlice';
+// import { reset } from '../features/auth/authSlice';
 
 const Dashboard = () => {
 	const navigate = useNavigate();
@@ -24,11 +24,13 @@ const Dashboard = () => {
 			navigate('/login');
 		}
 		dispatch(listIssues());
-
-		return () => {
-			dispatch(reset());
-		};
 	}, [user, navigate, isError, message, dispatch]);
+
+	// useEffect(() => {
+	// 	return () => {
+	// 		dispatch(reset());
+	// 	};
+	// }, [dispatch]);
 
 	if (isLoading) {
 		return <Spinner />;
