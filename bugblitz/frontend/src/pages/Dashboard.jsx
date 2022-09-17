@@ -4,8 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import IssueForm from '../components/IssueForm';
 import Issue from '../components/Issue';
 import Spinner from '../components/Spinner';
-import { listIssues } from '../features/issues/issueSlice';
-// import { reset } from '../features/auth/authSlice';
+import { listIssues, reset } from '../features/issues/issueSlice';
 
 const Dashboard = () => {
 	const navigate = useNavigate();
@@ -26,11 +25,11 @@ const Dashboard = () => {
 		dispatch(listIssues());
 	}, [user, navigate, isError, message, dispatch]);
 
-	// useEffect(() => {
-	// 	return () => {
-	// 		dispatch(reset());
-	// 	};
-	// }, [dispatch]);
+	useEffect(() => {
+		return () => {
+			dispatch(reset());
+		};
+	}, [dispatch]);
 
 	if (isLoading) {
 		return <Spinner />;
