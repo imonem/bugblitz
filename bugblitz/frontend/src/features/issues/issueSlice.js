@@ -33,7 +33,6 @@ export const listIssues = createAsyncThunk(
 	async (_, thunkAPI) => {
 		try {
 			const token = await thunkAPI.getState().auth.user.token;
-			console.log(token);
 			return await issueService.listIssues(token);
 		} catch (error) {
 			const message =
