@@ -3,6 +3,7 @@ import issueService from '../issues/issueService';
 
 const initialState = {
 	issues: [],
+	issue: {},
 	isError: false,
 	isSuccess: false,
 	isLoading: false,
@@ -10,7 +11,7 @@ const initialState = {
 };
 
 export const createIssue = createAsyncThunk(
-	'issue/create',
+	'issues/create',
 	async (issueData, thunkAPI) => {
 		try {
 			const token = await thunkAPI.getState().auth.user.token;
@@ -29,7 +30,7 @@ export const createIssue = createAsyncThunk(
 
 //Display issues
 export const listIssues = createAsyncThunk(
-	'issue/listAll',
+	'issues/listAll',
 	async (_, thunkAPI) => {
 		try {
 			const token = await thunkAPI.getState().auth.user.token;
@@ -47,6 +48,20 @@ export const listIssues = createAsyncThunk(
 );
 
 //Todo create the delete issue
+//Get one issue
+export const getIssue = createAsyncThunk('issues/', async (id, thunkAPI) => {
+	try {
+		const token = await thunkAPI.getState().auth.user.token;
+		return await issueService.getIssue(id, token);
+	} catch (error) {
+		const message =
+			(error.response && error.response.data && error.response.data.message) ||
+			error.message ||
+			error.toString();
+		console.log(error);
+		return thunkAPI.rejectWithValue(message);
+	}
+});
 
 //Issue slice
 export const issueSlice = createSlice({
@@ -79,6 +94,19 @@ export const issueSlice = createSlice({
 				state.issues = action.payload;
 			})
 			.addCase(listIssues.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
+			})
+			.addCase(getIssue.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(getIssue.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isSuccess = true;
+				state.issue = action.payload;
+			})
+			.addCase(getIssue.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
 				state.message = action.payload;

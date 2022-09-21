@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import IssueForm from '../components/IssueForm';
 import Issue from '../components/Issue';
@@ -45,7 +45,9 @@ const Dashboard = () => {
 				{issues.length > 0 ? (
 					<div className='issues'>
 						{issues.map((issue) => (
-							<Issue key={issue._id} issue={issue} />
+							<Link to={`/issues/${issue._id}`} key={issue._id}>
+								<Issue key={issue._id} issue={issue} />
+							</Link>
 						))}
 					</div>
 				) : (

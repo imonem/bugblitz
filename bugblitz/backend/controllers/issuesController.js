@@ -16,6 +16,33 @@ const getIssues = asyncHandler(async (req, res) => {
 });
 
 /**
+ *@desc Get one issue
+ *@route GET /api/issues
+ *@access Private
+ */
+const getIssue = asyncHandler(async (req, res) => {
+	const issue = await Issue.findById(req.params.id);
+	if (!issue) {
+		res.status(400);
+		throw new Error('Issue not found');
+	}
+
+	// check for user
+	if (!req.user) {
+		res.status(401);
+		throw new Error('User not found.');
+	}
+
+	//User updates own tickets
+	if (issue.user.toString() !== req.user.id) {
+		res.status(401);
+		throw new Error('User not authorized.');
+	}
+
+	res.status(200).json(issue);
+});
+
+/**
  *@desc Create issues
  *@route POST /api/issues
  *@access Private
@@ -96,4 +123,4 @@ const deleteIssue = asyncHandler(async (req, res) => {
 	res.status(200).json({ id: req.params.id });
 });
 
-module.exports = { getIssues, createIssue, updateIssue, deleteIssue };
+module.exports = { getIssues, getIssue, createIssue, updateIssue, deleteIssue };
